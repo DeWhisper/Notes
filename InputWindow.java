@@ -15,17 +15,20 @@ public class InputWindow extends Stage{
         VBox vBox = new VBox(10);
         TextArea textArea = new TextArea();
         Button submitButton = new Button("Submit");
-        textArea.setText(testFx.getLabelText());
+        textArea.setText(testFx.getTextInTextField());
         textArea.positionCaret(textArea.getText().length());
 
         submitButton.setOnAction(e -> {;
-            testFx.setLabel(textArea.getText());
+            testFx.setTextInTextField(textArea.getText());
             close();
         });
 
         vBox.getChildren().addAll(textArea, submitButton);
         Scene inputScene = new Scene(vBox, 250, 150);
 
+        setOnCloseRequest(event -> {
+            testFx.setTextInTextField(testFx.getTextInTextField());
+        });
         setScene(inputScene);
     }
 }
